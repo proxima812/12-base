@@ -5,10 +5,15 @@ import dataList from "@src/data/output.json";
 import Layout from "@src/layouts/Layout.astro";
 import Top from "@src/layouts/Top.astro";
 
+const files = await dataList;
+
 const dataLength = dataList.length;
 ---
 
-<Layout title="" description="">
+<Layout
+ title="База знаний 12 шагов"
+ description="Материалы, документация, руководства, опыт связанные с духовными принципами и 12 шагами (12 традиции, 12 шагов выздоровления)"
+>
  <Top>
   <div class="mb-3 pt-10">
    <SearchJSON
@@ -31,7 +36,7 @@ const dataLength = dataList.length;
   <div class="-mx-5 md:-mx-0 divide-y divide-gray-200 bg-white shadow-sm rounded-b-lg">
    <!-- href={"base/" + file.slug} -->
    {
-    dataList.map((file) => (
+    files.map((file) => (
      <div class="flex sm:flex-row flex-col justify-between gap-5 p-3 hover:bg-gray-200/60">
       <a
        class=" cursor-pointer text-slate-700 leading-tight flex flex-wrap gap-1 items-end"
