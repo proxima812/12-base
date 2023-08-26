@@ -5,8 +5,6 @@ import dataList from "@src/data/output.json";
 import Layout from "@src/layouts/Layout.astro";
 import Top from "@src/layouts/Top.astro";
 
-const files = await dataList;
-
 const dataLength = dataList.length;
 ---
 
@@ -36,7 +34,7 @@ const dataLength = dataList.length;
   <div class="-mx-5 md:-mx-0 divide-y divide-gray-200 bg-white shadow-sm rounded-b-lg">
    <!-- href={"base/" + file.slug} -->
    {
-    files.map((file) => (
+    dataList.map((file) => (
      <div class="flex sm:flex-row flex-col justify-between gap-5 p-3 hover:bg-gray-200/60">
       <a
        class=" cursor-pointer text-slate-700 leading-tight flex flex-wrap gap-1 items-end"

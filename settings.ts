@@ -3,7 +3,7 @@ export const setting = {
   siteName: "",
   siteDescription: "",
   // https://
-  siteLink: "https://12base.vercel.app",
+  siteLink: "https://12base.vercel.app/",
   locale: "ru_RU",
   // HEX color
   themeColorWhiteTheme: "",
