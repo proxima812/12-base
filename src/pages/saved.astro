@@ -1,0 +1,11 @@
+---
+import SavedPosts from "@src/components/functional/SavedPosts";
+import Layout from "@src/layouts/Layout.astro";
+import Top from "@src/layouts/Top.astro";
+---
+
+<Layout>
+ <Top>
+  <div class="mt-10"><SavedPosts client:load /></div>
+ </Top>
+</Layout>

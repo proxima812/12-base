@@ -1,0 +1,41 @@
+---
+import PdfViewer from "@src/components/functional/PdfViewer";
+import data from "@src/data/output.json";
+import Top from "@src/layouts/Top.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+ return data.map((file) => {
+  return {
+   params: { slug: file.slug },
+   props: { files: file },
+  };
+ });
+}
+
+const { files } = Astro.props;
+const { name, path, format, size } = files;
+
+const a = "self-start rounded-md px-3 py-1";
+const title = "База знаний - ";
+---
+
+<Layout title={title + name}>
+ <Top>
+  <div class="relative p-10 rounded-lg flex flex-col gap-5 bg-white/80 backdrop-blur-md">
+   <h1 class="text-2xl font-bold">{name}</h1>
+   <span class="text-gray-500">Файл весит: <b>{size}</b></span>
+   <div class="flex items-center flex-wrap gap-5">
+    <a href="/base" class={`bg-white ${a}`}>Назад к файлам</a>
+    <a href={path} class={`text-green-600 bg-green-200 ${a}`}
+     >Скачать <span class="text-green-700 text-xs">{size}</span></a
+    >
+    <a href="https://t.me/all_12steps" class={`text-indigo-500 bg-indigo-100 ${a}`}
+     >💜 @all_12steps</a
+    >
+   </div>
+  </div>
+  <PdfViewer path={path} client:visible />
+ </Top>
+</Layout>
+@src/layouts/data/output.json

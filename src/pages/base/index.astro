@@ -1,0 +1,108 @@
+---
+import Banners from "@src/components/functional/Banners.astro";
+import SearchJSON from "@src/components/ui/SearchJSON";
+import dataList from "@src/data/output.json";
+import Layout from "@src/layouts/Layout.astro";
+import Top from "@src/layouts/Top.astro";
+
+const dataLength = dataList.length;
+---
+
+<Layout title="" description="">
+ <Top>
+  <div class="mb-3 pt-10">
+   <SearchJSON
+    searchWords={"Поиск по названию, формату..."}
+    searchList={dataList}
+    client:load
+   />
+  </div>
+
+  <div
+   class="relative -mx-5 md:-mx-0 flex flex-wrap gap-2 justify-between p-3 bg-white rounded-t-lg"
+  >
+   <span>
+    🗂 Всего файлов: <b>{dataLength}</b>
+   </span>
+   <a href="https://t.me/fb_steps_bot" class="text-blue-500"
+    >📄 <span class="underline underline-offset-4">Прислать свой файл</span></a
+   >
+  </div>
+  <div class="-mx-5 md:-mx-0 divide-y divide-gray-200 bg-white shadow-sm rounded-b-lg">
+   <!-- href={"base/" + file.slug} -->
+   {
+    dataList.map((file) => (
+     <div class="flex sm:flex-row flex-col justify-between gap-5 p-3 hover:bg-gray-200/60">
+      <a
+       class=" cursor-pointer text-slate-700 leading-tight flex flex-wrap gap-1 items-end"
+       href={`${
+        file.format.includes(".epub") ||
+        file.format.includes(".doc") ||
+        file.format.includes(".docx") ||
+        file.format.includes(".jpeg") ||
+        file.format.includes(".png")
+         ? `${file.path}`
+         : "base/" + file.slug
+       } `}
+      >
+       <span>🔗 {file.name}</span>
+       <span
+        data-size={file.size}
+        class:list={`text-xs ${
+         file.size.includes("MB") ? "text-red-500" : "text-green-500"
+        }`}
+       >
+        {file.size}
+       </span>
+      </a>
+
+      <div class="flex items-center gap-2">
+       <span
+        data-format={file.format}
+        class:list={`text-white rounded-md font-medium tracking-tight px-2 py-1 leading-none ${
+         file.format === ".pdf"
+          ? "bg-red-500"
+          : file.format === ".docx"
+          ? "bg-blue-500"
+          : file.format === ".doc"
+          ? "bg-blue-400"
+          : file.format === ".epub"
+          ? "bg-orange-400"
+          : file.format === ".jpeg"
+          ? "bg-sky-400"
+          : file.format === ".png"
+          ? "bg-green-600"
+          : file.format === ".fb2"
+          ? "bg-blue-700"
+          : file.format === ".zip"
+          ? "bg-slate-900"
+          : "bg-slate-400"
+        }`}
+       >
+        {file.format}
+       </span>
+       <a href={file.path} class="text-gray-500 underline underline-offset-4">
+        Скачать
+       </a>
+       <button
+        aria-label={file.name}
+        data-format={file.format}
+        data-size={file.size}
+        data-saveid={"base/" + file.slug}
+        aria-pressed="false"
+       >
+        {" "}
+       </button>
+      </div>
+     </div>
+    ))
+   }
+  </div>
+ </Top>
+ <Banners />
+
+ <script>
+  import favoriteLogic from "../../libs/favoriteLogic.js";
+  favoriteLogic();
+ </script>
+</Layout>

@@ -1,0 +1,5 @@
+---
+const { frontmatter, url } = Astro.props;
+---
+
+<button aria-label={frontmatter.title} data-saveid={url} aria-pressed="false"> </button>

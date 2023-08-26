@@ -1,0 +1,11 @@
+---
+import SavedBtnLen from "@src/components/functional/SavedBtnLen";
+import Logo from "../ui/Logo.astro";
+---
+
+<header class="h-[300px] bg-indigo-500" transition:persist>
+ <div class="pt-10 container px-5 mx-auto flex items-center justify-between">
+  <Logo color={"white"} />
+  <SavedBtnLen client:load />
+ </div>
+</header>

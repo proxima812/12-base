@@ -1,0 +1,82 @@
+---
+import { setting } from "settings";
+
+export interface Props {
+ title: string;
+ description: string;
+ poster?: string;
+ typeSite?: string;
+}
+
+const siteName = setting.site.siteName;
+const localeLang = setting.site.locale;
+
+const { title, description, typeSite = "website", poster } = Astro.props;
+
+const canonicalURL = new URL(Astro.site + Astro.url.pathname);
+
+const mainTitle = title ?? "Страница";
+const OGmainPoster = poster ?? "";
+const default_description =
+ description ??
+ "Материалы, документация, руководства, опыт связанные с духовными принципами и 12 шагами (12 традиции, 12 шагов выздоровления)";
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- <link rel="manifest" href="/manifest.json" /> -->
+
+<link rel="icon" sizes="32x32" href="/favicon.ico" />
+<link rel="icon" sizes="120x120" type="image/svg+xml" href="/favicon.svg" />
+
+<link
+ rel="apple-touch-icon"
+ type="image/png"
+ sizes="180x180"
+ href="/icons/icon-180x180.png"
+/>
+<meta name="generator" content={Astro.generator} />
+
+<!-- Main  -->
+<title>{mainTitle}</title>
+<meta name="title" content={mainTitle} />
+<meta name="description" content={default_description} />
+
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Sitemap and RSS feed  -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+
+{
+ setting.verifications.yandex && (
+  <meta name="yandex-verification" content={setting.verifications.yandex} />
+ )
+}
+{
+ setting.verifications.google && (
+  <meta name="google-site-verification" content={setting.verifications.google} />
+ )
+}
+{
+ setting.verifications.facebookApp && (
+  <meta property="fb:app_id" content={setting.verifications.facebookApp} />
+ )
+}
+
+<meta property="og:type" content={typeSite} />
+
+<meta property="og:url" content={Astro.url} />
+<meta property="og:locale" content={localeLang} />
+<meta property="og:title" content={mainTitle} />
+<meta property="og:description" content={default_description} />
+
+{OGmainPoster && <meta property="og:image" content={OGmainPoster} />}
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={mainTitle} />
+<meta property="twitter:creator" content={siteName} />
+<meta property="twitter:description" content={default_description} />
+{OGmainPoster && <meta property="twitter:image" content={OGmainPoster} />}

@@ -1,0 +1,46 @@
+---
+import ToUp from "@src/components/functional/ToUp.astro";
+import BaseHead from "@src/components/main/BaseHead.astro";
+import Footer from "@src/components/main/Footer.astro";
+import Header from "@src/components/main/Header.astro";
+import "@src/css/base.css";
+
+interface Props {
+ title: string;
+ description: string;
+ poster: string;
+ typeSite: string;
+ sectionSite: string;
+ modDate: string;
+ pubDate: string;
+ author: string;
+}
+
+const { title, description, poster, typeSite, sectionSite, modDate, pubDate, author } =
+ Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+ <head>
+  <BaseHead
+   title={title}
+   description={description}
+   poster={poster}
+   author={author}
+   typeSite={typeSite}
+   sectionSite={sectionSite}
+   pubDate={pubDate}
+   modDate={modDate}
+  />
+ </head>
+ <body class="bg-[#f5f5f5] text-[#06031B]">
+  <Header />
+  <main class="container mx-auto px-5">
+   <slot />
+  </main>
+  <Footer />
+  <ToUp />
+  <!-- <ViewTransitions /> -->
+ </body>
+</html>
