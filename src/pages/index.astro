@@ -46,7 +46,7 @@ const dataLength = dataList.length;
         file.format.includes(".jpeg") ||
         file.format.includes(".png")
          ? `${file.path}`
-         : "base/" + file.slug
+         : file.slug
        } `}
       >
        <span>🔗 {file.name}</span>
@@ -92,7 +92,7 @@ const dataLength = dataList.length;
         aria-label={file.name}
         data-format={file.format}
         data-size={file.size}
-        data-saveid={"base/" + file.slug}
+        data-saveid={file.slug}
         aria-pressed="false"
        >
         {" "}
@@ -106,7 +106,7 @@ const dataLength = dataList.length;
  <Banners />
 
  <script>
-  import favoriteLogic from "../../libs/favoriteLogic.js";
+  import favoriteLogic from "../libs/favoriteLogic.js";
   favoriteLogic();
  </script>
 </Layout>

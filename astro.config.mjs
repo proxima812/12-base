@@ -12,9 +12,6 @@ export default defineConfig({
  site: `${setting.site.siteLink}`,
  experimental: { assets: true, viewTransitions: true },
  compressHTML: true,
- redirects: {
-  "/": "/base",
- },
  integrations: [
   partytown(),
   tailwind({
