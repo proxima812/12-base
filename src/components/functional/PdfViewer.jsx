@@ -10,7 +10,7 @@ import { setting } from "settings";
 function PdfViewer({ path }) {
  const defaultLayoutPluginInstance = defaultLayoutPlugin();
  return (
-  <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.js">
+  <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.10.111/build/pdf.worker.js">
    <div style={{ width: "100%", height: "100%" }}>
     <Viewer
      fileUrl={setting.site.siteLink && "" + path}

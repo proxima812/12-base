@@ -1,8 +1,8 @@
 ---
 import PdfViewer from "@src/components/functional/PdfViewer";
 import data from "@src/data/output.json";
-import Top from "@src/layouts/Top.astro";
 import Layout from "@src/layouts/Layout.astro";
+import Top from "@src/layouts/Top.astro";
 
 export async function getStaticPaths() {
  return data.map((file) => {
@@ -27,7 +27,7 @@ const title = "База знаний - ";
    <span class="text-gray-500">Файл весит: <b>{size}</b></span>
    <div class="flex items-center flex-wrap gap-5">
     <a href="/" class={`bg-white ${a}`}>Назад к файлам</a>
-    <a href={path} class={`text-green-600 bg-green-200 ${a}`}
+    <a href={path} class={`text-green-600 bg-green-200 ${a}`} data-astro-reload
      >Скачать <span class="text-green-700 text-xs">{size}</span></a
     >
     <a href="https://t.me/all_12steps" class={`text-purple-500 bg-purple-100 ${a}`}
